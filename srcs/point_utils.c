@@ -6,7 +6,7 @@
 /*   By: cbernot <cbernot@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 18:18:19 by cbernot           #+#    #+#             */
-/*   Updated: 2023/01/11 21:10:25 by cbernot          ###   ########.fr       */
+/*   Updated: 2023/01/18 17:40:13 by cbernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ int	set_origin_point(t_cell **lst, int x_len, int y_len)
 		cell_size = 800 / (y_len + 2);
 	origin = (1300 / 2) + (cell_size * y_len) - (cell_size * x_len);
 	(*lst)->graph_x = origin;
-	(*lst)->graph_y = 10;
+	(*lst)->graph_y = 20;
 	return (cell_size);
 }

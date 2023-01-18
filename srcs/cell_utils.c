@@ -6,7 +6,7 @@
 /*   By: cbernot <cbernot@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:29:27 by cbernot           #+#    #+#             */
-/*   Updated: 2023/01/11 23:55:56 by cbernot          ###   ########.fr       */
+/*   Updated: 2023/01/18 16:49:22 by cbernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_add_cell_back(t_cell **lst, t_cell *new)
 	(*lst)->prev = new;
 }
 
-void	ft_free_cells_lst(t_hook_param *p)
+int	ft_free_cells_lst(t_hook_param *p)
 {
 	t_cell	**lst;
 	t_cell	*current;
@@ -69,5 +69,6 @@ void	ft_free_cells_lst(t_hook_param *p)
 		}
 	}
 	free(lst);
-	free(p);
+	exit(EXIT_SUCCESS);
+	return (0);
 }

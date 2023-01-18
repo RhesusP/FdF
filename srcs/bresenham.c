@@ -6,13 +6,13 @@
 /*   By: cbernot <cbernot@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 15:59:21 by cbernot           #+#    #+#             */
-/*   Updated: 2023/01/11 23:29:03 by cbernot          ###   ########.fr       */
+/*   Updated: 2023/01/18 15:13:36 by cbernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./../includes/fdf.h"
 
-static void	draw_seg_low(t_hook_param *param, t_point p1, t_point p2)
+static void	draw_seg_low(t_hook_param param, t_point p1, t_point p2)
 {
 	int	dy;
 	int	yi;
@@ -32,7 +32,8 @@ static void	draw_seg_low(t_hook_param *param, t_point p1, t_point p2)
 	x = p1.x;
 	while (x < p2.x)
 	{
-		mlx_pixel_put(param->mlx_ptr, param->win_ptr, x, y, param->color);
+		if (x >= 0 && x <= 1300 && y >= 0 && y <= 800)
+			mlx_pixel_put(*(param.mlx_ptr), *(param.win_ptr), x, y, *(param.color));
 		if (derive > 0)
 		{
 			y += yi;
@@ -44,7 +45,7 @@ static void	draw_seg_low(t_hook_param *param, t_point p1, t_point p2)
 	}
 }
 
-static void	draw_seg_high(t_hook_param *param, t_point p1, t_point p2)
+static void	draw_seg_high(t_hook_param param, t_point p1, t_point p2)
 {
 	int	dx;
 	int	xi;
@@ -64,7 +65,8 @@ static void	draw_seg_high(t_hook_param *param, t_point p1, t_point p2)
 	x = p1.x;
 	while (y < p2.y)
 	{
-		mlx_pixel_put(param->mlx_ptr, param->win_ptr, x, y, param->color);
+		if (x >= 0 && x <= 1300 && y >= 0 && y <= 800)
+			mlx_pixel_put(*(param.mlx_ptr), *(param.win_ptr), x, y, *(param.color));
 		if (derive > 0)
 		{
 			x += xi;
@@ -76,7 +78,7 @@ static void	draw_seg_high(t_hook_param *param, t_point p1, t_point p2)
 	}
 }
 
-void	ft_draw_seg(t_hook_param *param, t_point p1, t_point p2)
+void	ft_draw_seg(t_hook_param param, t_point p1, t_point p2)
 {
 	if (abs(p2.y - p1.y) < abs(p2.x - p1.x))
 	{

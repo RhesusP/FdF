@@ -6,7 +6,7 @@
 #    By: cbernot <cbernot@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/04 23:40:27 by cbernot           #+#    #+#              #
-#    Updated: 2023/01/11 17:25:13 by cbernot          ###   ########.fr        #
+#    Updated: 2023/01/18 13:40:17 by cbernot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,13 @@ INCLUDES = ./includes/fdf.h
 FLAGS = 
 
 %.o: %.c ${INCLUDES}
-	cc ${FLAGS} -I ${INCLUDES} -c $< -o $@
+	cc ${FLAGS} -g -I ./minilibx -I ${INCLUDES} -c $< -o $@
 
 ${NAME}: ${OBJS}
 	make -C ./minilibx
 	make -C ./libft
-	cc ${OBJS} -L minilibx -lmlx -framework OpenGL -framework AppKit -L ./libft -lft -o ${NAME}
+	cc ${OBJS} -L ./minilibx -l mlx -framework OpenGL -framework AppKit -L ./libft -lft -o ${NAME}
+#cc ${OBJS} -L minilibx -lmlx -framework OpenGL -framework AppKit -L ./libft -lft -o ${NAME}
 
 all: ${NAME}
 

@@ -6,7 +6,7 @@
 /*   By: cbernot <cbernot@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 17:22:38 by cbernot           #+#    #+#             */
-/*   Updated: 2023/01/12 00:00:08 by cbernot          ###   ########.fr       */
+/*   Updated: 2023/01/18 17:42:42 by cbernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ t_cell	*get_bottom_neighbour(t_cell *cell, int x_len)
 	return (neighbour);
 }
 
-void	link_neighbours(t_cell *cell, t_hook_param *param)
+static void	link_neighbours(t_cell *cell, t_hook_param param)
 {
 	int		i;
 	t_cell	*nbr;
@@ -96,7 +96,7 @@ void	link_neighbours(t_cell *cell, t_hook_param *param)
 		p2 = ft_create_point(cell->next->graph_x, cell->next->graph_y, 0);
 		ft_draw_seg(param, p1, p2);
 	}
-	nbr = get_bottom_neighbour(cell, param->x_len);
+	nbr = get_bottom_neighbour(cell, param.x_len);
 	if (nbr)
 	{
 		p1 = ft_create_point(cell->graph_x, cell->graph_y, cell->point.z);
@@ -105,11 +105,11 @@ void	link_neighbours(t_cell *cell, t_hook_param *param)
 	}
 }
 
-void	link_points(t_hook_param *param)
+void	link_points(t_hook_param param)
 {
 	t_cell	*current;
 
-	current = *(param->cell);
+	current = *(param.cell);
 	while (current)
 	{
 		link_neighbours(current, param);
@@ -122,29 +122,33 @@ void	draw_map(t_cell **lst, int x_len, int y_len)
 	void			*mlx_ptr;
 	void			*win_ptr;
 	int				cell_size;
-	t_hook_param	*param;
+	t_hook_param	param;
+	int				color;
 
-	param = malloc(sizeof(t_hook_param *));
-	if (!param)
-		return ;
+	color = 16777215;
+	cell_size = 0;
 	mlx_ptr = mlx_init();
-	mlx_do_key_autorepeaton(mlx_ptr);
+	if (!mlx_ptr)
+		exit(EXIT_FAILURE);
 	win_ptr = mlx_new_window(mlx_ptr, 1300, 800, "FdF");
-	param->cell = lst;
-	param->mlx_ptr = mlx_ptr;
-	param->win_ptr = win_ptr;
-	param->cell_size = 0;
-	param->x_len = x_len;
-	param->color = 16777215;
+	if (!win_ptr)
+		exit(EXIT_FAILURE);
+	param.cell = lst;
+	param.cell_size = &cell_size;
+	param.x_len = x_len;
+	param.color = &color;	
+	param.mlx_ptr = &mlx_ptr;
+	param.win_ptr = &win_ptr;
 	if (*lst)
 	{
 		cell_size = set_origin_point(lst, x_len, y_len);
-		param->cell_size = cell_size;
-		update_coordinates(lst, cell_size, x_len);
-		set_altitudes(lst, cell_size);
+		param.cell_size = &cell_size;
+		update_coordinates(lst, *(param.cell_size), x_len);
+		set_altitudes(lst, *(param.cell_size));
 		link_points(param);
 	}
-	mlx_key_hook(win_ptr, deal_key, param);
-	mlx_hook(win_ptr, 17, 0, ft_free_cells_lst, param);
+	mlx_do_key_autorepeaton(mlx_ptr);
+	mlx_hook(*(param.win_ptr), 2, (1L << 0), deal_key, &param);
+	mlx_hook(*(param.win_ptr), 17, (1L<<2), ft_free_cells_lst, &param);
 	mlx_loop(mlx_ptr);
 }
