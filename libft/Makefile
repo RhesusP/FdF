@@ -6,7 +6,7 @@
 #    By: cbernot <cbernot@student.42lyon.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/07 14:02:40 by cbernot           #+#    #+#              #
-#    Updated: 2022/12/17 14:58:21 by cbernot          ###   ########.fr        #
+#    Updated: 2023/01/19 14:33:05 by cbernot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ OBJS=${SRCS:.c=.o}
 BONUS_OBJS = ${BONUS_SRCS:.c=.o}
 
 %.o : %.c Makefile libft.h
-	gcc ${FLAGS} -I libft.h -I ./get_next_line/get_next_line.h -c $< -o $@
+	cc ${FLAGS} -I libft.h -I ./get_next_line/get_next_line.h -c $< -o $@
 	
 $(NAME): ${OBJS}
 	ar rcs ${NAME} ${OBJS}
