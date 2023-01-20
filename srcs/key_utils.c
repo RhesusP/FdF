@@ -6,7 +6,7 @@
 /*   By: cbernot <cbernot@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 17:23:35 by cbernot           #+#    #+#             */
-/*   Updated: 2023/01/18 16:49:29 by cbernot          ###   ########.fr       */
+/*   Updated: 2023/01/20 13:40:50 by cbernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static void	change_color(t_hook_param *param)
 {
-	int			colors[6];
-	static int	index = 0;
+	int				colors[6];
+	static int		index = 0;
 	t_hook_param	p;
 
 	p = *param;
-	if (!p.cell)
+	if (!p.cell || !*(p.cell))
 		return ;
 	colors[0] = 16777215;
 	colors[1] = 11883520;
@@ -30,8 +30,8 @@ static void	change_color(t_hook_param *param)
 	index += 1;
 	if (index > 5)
 		index = 0;
-	*(p.color) = colors[index];
-	mlx_clear_window(*(p.mlx_ptr), *(p.win_ptr));
+	*(p.col) = colors[index];
+	mlx_clear_window(*(p.mlx), *(p.win));
 	link_points(p);
 }
 
@@ -40,11 +40,11 @@ static void	zoom(t_hook_param *param)
 	t_hook_param	p;
 
 	p = *param;
-	if (!p.cell || *(p.cell_size) - 10 < 1)
+	if (!p.cell || !*(p.cell) || *(p.cell_size) - 10 < 1)
 		return ;
 	*(p.cell_size) += 10;
-	mlx_clear_window(*(p.mlx_ptr), *(p.win_ptr));
-	update_coordinates(p.cell, *(p.cell_size), p.x_len);
+	mlx_clear_window(*(p.mlx), *(p.win));
+	update_coordinates(p.cell, *(p.cell_size));
 	set_altitudes(p.cell, *(p.cell_size));
 	link_points(p);
 }
@@ -54,11 +54,11 @@ static void	unzoom(t_hook_param *param)
 	t_hook_param	p;
 
 	p = *param;
-	if (!p.cell)
+	if (!p.cell || !*(p.cell))
 		return ;
 	*(p.cell_size) -= 10;
-	mlx_clear_window(*(p.mlx_ptr), *(p.win_ptr));
-	update_coordinates(p.cell, *(p.cell_size), p.x_len);
+	mlx_clear_window(*(p.mlx), *(p.win));
+	update_coordinates(p.cell, *(p.cell_size));
 	set_altitudes(p.cell, *(p.cell_size));
 	link_points(p);
 }
@@ -68,7 +68,7 @@ void	quit(t_hook_param *param)
 	t_hook_param	p;
 
 	p = *param;
-	mlx_destroy_window(*(p.mlx_ptr), *(p.win_ptr));
+	mlx_clear_window(*(p.mlx), *(p.win));
 	ft_free_cells_lst(param);
 	exit(0);
 }

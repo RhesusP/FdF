@@ -6,7 +6,7 @@
 /*   By: cbernot <cbernot@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:02:39 by cbernot           #+#    #+#             */
-/*   Updated: 2023/01/18 14:18:54 by cbernot          ###   ########.fr       */
+/*   Updated: 2023/01/20 14:05:09 by cbernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,31 @@ int	extract_line(t_cell **lst, char *line, int *y_len)
 	return (len);
 }
 
+static int	open_file(t_cell **lst, char *path)
+{
+	int	fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd == -1)
+	{
+		ft_putendl_fd("Error", 2);
+		free(lst);
+		exit(EXIT_FAILURE);
+	}
+	return (fd);
+}
+
 t_cell	**parse_file(char *path, int *x_len, int *y_len)
 {
 	char	*line;
 	int		fd;
 	t_cell	**lst;
+
 	lst = malloc(sizeof(t_cell *));
 	if (!lst)
 		return (0);
 	*lst = 0;
-	fd = open(path, O_RDONLY);
+	fd = open_file(lst, path);
 	line = "";
 	*x_len = 0;
 	while (line)

@@ -6,7 +6,7 @@
 /*   By: cbernot <cbernot@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 23:38:44 by cbernot           #+#    #+#             */
-/*   Updated: 2023/01/18 16:44:27 by cbernot          ###   ########.fr       */
+/*   Updated: 2023/01/20 13:06:40 by cbernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ typedef struct s_cell
 typedef struct s_hook_param
 {
 	t_cell	**cell;
-	void	**mlx_ptr;
-	void	**win_ptr;
+	void	**mlx;
+	void	**win;
 	int		*cell_size;
 	int		x_len;
-	int		*color;
+	int		*col;
 }	t_hook_param;
 
 t_cell	**parse_file(char *path, int *x_len, int *y_len);
@@ -60,6 +60,7 @@ void	draw_map(t_cell **lst, int x_len, int y_len);
 t_point	ft_get_angle_point(t_point point, int deg, int cell_size);
 t_point	ft_create_point(int x, int y, int z);
 void	ft_print_point(t_point p);
+t_point	put_point(t_cell *c, t_cell *first, int cell_size);
 
 void	translation_down(t_hook_param *p);
 void	translation_up(t_hook_param *p);
@@ -71,6 +72,6 @@ void	quit(t_hook_param *param);
 int		set_origin_point(t_cell **lst, int x_len, int y_len);
 void	link_points(t_hook_param param);
 void	set_altitudes(t_cell **lst, int cell_size);
-void	update_coordinates(t_cell **lst, int cell_size, int x_len);
+void	update_coordinates(t_cell **lst, int cell_size);
 
 #endif

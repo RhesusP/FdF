@@ -6,7 +6,7 @@
 /*   By: cbernot <cbernot@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 15:29:27 by cbernot           #+#    #+#             */
-/*   Updated: 2023/01/18 16:49:22 by cbernot          ###   ########.fr       */
+/*   Updated: 2023/01/20 13:04:58 by cbernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	ft_free_cells_lst(t_hook_param *p)
 	t_cell	*current;
 	t_cell	*next;
 
+	lst = p->cell;
 	if (lst)
 	{
 		lst = p->cell;
