@@ -6,7 +6,7 @@
 /*   By: cbernot <cbernot@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 23:34:38 by cbernot           #+#    #+#             */
-/*   Updated: 2023/01/20 11:39:50 by cbernot          ###   ########.fr       */
+/*   Updated: 2023/01/20 14:53:55 by cbernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2 || is_extension_bad(argv[1]))
 	{
-		ft_putendl_fd("[!] USAGE: ./fdf [FDF_MAP]", 2);
+		ft_putendl_fd("[!] USAGE: ./fdf map.fdf", 2);
 		return (0);
 	}
 	lst = parse_file(argv[1], &x_len, &y_len);
