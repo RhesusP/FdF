@@ -26,6 +26,6 @@ The only constraints are the following:
 
 ## Useful links
 
-[wikipedia page of the Bresenham's line algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm)  
+[Wikipedia page of the Bresenham's line algorithm](https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm)  
 [MinilibX 42 documentation](https://harm-smits.github.io/42docs/libs/minilibx)  
 [This awesome explanation about mlx hooks and events](https://gist.github.com/KokaKiwi/4052375)
