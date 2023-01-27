@@ -6,7 +6,7 @@
 /*   By: cbernot <cbernot@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 13:05:33 by cbernot           #+#    #+#             */
-/*   Updated: 2023/01/20 14:39:42 by cbernot          ###   ########.fr       */
+/*   Updated: 2023/01/27 18:43:17 by cbernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	set_altitudes(t_cell **lst, int cell_size)
 	current = *lst;
 	while (current)
 	{
-		current->graph_y -= (current->point.z * cell_size * 0.6);
+		current->graph_y -= (current->point.z * cell_size * 0.4);
 		current = current->next;
 	}
 }

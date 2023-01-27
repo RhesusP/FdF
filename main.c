@@ -6,7 +6,7 @@
 /*   By: cbernot <cbernot@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 23:34:38 by cbernot           #+#    #+#             */
-/*   Updated: 2023/01/20 14:53:55 by cbernot          ###   ########.fr       */
+/*   Updated: 2023/01/27 18:41:17 by cbernot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 int	is_extension_bad(char *str)
 {
 	char	*extension;
-	int		i;
 
-	i = 0;
 	extension = ft_strrchr(str, '.');
 	if (!extension)
 		return (1);
